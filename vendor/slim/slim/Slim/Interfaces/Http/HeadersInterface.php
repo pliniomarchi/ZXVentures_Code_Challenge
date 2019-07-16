@@ -8,16 +8,17 @@
  */
 namespace Slim\Interfaces\Http;
 
+use Slim\Interfaces\CollectionInterface;
+
 /**
- * Cookies Interface
+ * Headers Interface
  *
  * @package Slim
  * @since   3.0.0
  */
-interface CookiesInterface
+interface HeadersInterface extends CollectionInterface
 {
-    public function get($name, $default = null);
-    public function set($name, $value);
-    public function toHeaders();
-    public static function parseHeader($header);
+    public function add($key, $value);
+
+    public function normalizeKey($key);
 }

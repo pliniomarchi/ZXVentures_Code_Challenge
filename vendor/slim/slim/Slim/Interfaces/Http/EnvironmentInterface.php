@@ -9,15 +9,12 @@
 namespace Slim\Interfaces\Http;
 
 /**
- * Cookies Interface
+ * Environment Interface
  *
  * @package Slim
  * @since   3.0.0
  */
-interface CookiesInterface
+interface EnvironmentInterface
 {
-    public function get($name, $default = null);
-    public function set($name, $value);
-    public function toHeaders();
-    public static function parseHeader($header);
+    public static function mock(array $settings = []);
 }
