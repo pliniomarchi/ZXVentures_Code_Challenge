@@ -2,7 +2,7 @@
 
 namespace FastRoute\Dispatcher;
 
-class MarkBased extends RegexBasedAbstract
+class GroupPosBased extends RegexBasedAbstract
 {
     public function __construct($data)
     {
@@ -16,12 +16,14 @@ class MarkBased extends RegexBasedAbstract
                 continue;
             }
 
-            list($handler, $varNames) = $data['routeMap'][$matches['MARK']];
+            // find first non-empty match
+            for ($i = 1; '' === $matches[$i]; ++$i);
+
+            list($handler, $varNames) = $data['routeMap'][$i];
 
             $vars = [];
-            $i = 0;
             foreach ($varNames as $varName) {
-                $vars[$varName] = $matches[++$i];
+                $vars[$varName] = $matches[$i++];
             }
             return [self::FOUND, $handler, $vars];
         }

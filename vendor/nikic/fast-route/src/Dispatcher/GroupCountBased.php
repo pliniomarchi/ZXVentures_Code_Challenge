@@ -2,7 +2,7 @@
 
 namespace FastRoute\Dispatcher;
 
-class MarkBased extends RegexBasedAbstract
+class GroupCountBased extends RegexBasedAbstract
 {
     public function __construct($data)
     {
@@ -16,7 +16,7 @@ class MarkBased extends RegexBasedAbstract
                 continue;
             }
 
-            list($handler, $varNames) = $data['routeMap'][$matches['MARK']];
+            list($handler, $varNames) = $data['routeMap'][count($matches)];
 
             $vars = [];
             $i = 0;
