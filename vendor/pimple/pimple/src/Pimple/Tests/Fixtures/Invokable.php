@@ -26,10 +26,13 @@
 
 namespace Pimple\Tests\Fixtures;
 
-/**
- * @author  Igor Wiedler <igor@wiedler.ch>
- */
-class Service
+class Invokable
 {
-    public $value;
+    public function __invoke($value = null)
+    {
+        $service = new Service();
+        $service->value = $value;
+
+        return $service;
+    }
 }
