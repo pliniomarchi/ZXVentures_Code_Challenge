@@ -26,20 +26,20 @@
 
 namespace Pimple\Exception;
 
-use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
- * An attempt to modify a frozen service was made.
+ * The identifier of a valid service or parameter was expected.
  *
  * @author Pascal Luna <skalpa@zetareticuli.org>
  */
-class FrozenServiceException extends \RuntimeException implements ContainerExceptionInterface
+class UnknownIdentifierException extends \InvalidArgumentException implements NotFoundExceptionInterface
 {
     /**
-     * @param string $id Identifier of the frozen service
+     * @param string $id The unknown identifier
      */
     public function __construct($id)
     {
-        parent::__construct(\sprintf('Cannot override frozen service "%s".', $id));
+        parent::__construct(\sprintf('Identifier "%s" is not defined.', $id));
     }
 }

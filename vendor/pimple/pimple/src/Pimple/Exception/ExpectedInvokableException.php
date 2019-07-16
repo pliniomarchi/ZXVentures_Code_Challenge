@@ -29,17 +29,10 @@ namespace Pimple\Exception;
 use Psr\Container\ContainerExceptionInterface;
 
 /**
- * An attempt to modify a frozen service was made.
+ * A closure or invokable object was expected.
  *
  * @author Pascal Luna <skalpa@zetareticuli.org>
  */
-class FrozenServiceException extends \RuntimeException implements ContainerExceptionInterface
+class ExpectedInvokableException extends \InvalidArgumentException implements ContainerExceptionInterface
 {
-    /**
-     * @param string $id Identifier of the frozen service
-     */
-    public function __construct($id)
-    {
-        parent::__construct(\sprintf('Cannot override frozen service "%s".', $id));
-    }
 }
