@@ -13,13 +13,14 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Interfaces\InvocationStrategyInterface;
 
 /**
- * Default route callback strategy with route parameters as an array of arguments.
+ * Route callback strategy with route parameters as individual arguments.
  */
-class RequestResponse implements InvocationStrategyInterface
+class RequestResponseArgs implements InvocationStrategyInterface
 {
+
     /**
-     * Invoke a route callable with request, response, and all route parameters
-     * as an array of arguments.
+     * Invoke a route callable with request, response and all route parameters
+     * as individual arguments.
      *
      * @param array|callable         $callable
      * @param ServerRequestInterface $request
@@ -34,10 +35,8 @@ class RequestResponse implements InvocationStrategyInterface
         ResponseInterface $response,
         array $routeArguments
     ) {
-        foreach ($routeArguments as $k => $v) {
-            $request = $request->withAttribute($k, $v);
-        }
+        array_unshift($routeArguments, $request, $response);
 
-        return call_user_func($callable, $request, $response, $routeArguments);
+        return call_user_func_array($callable, $routeArguments);
     }
 }
