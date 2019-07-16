@@ -146,8 +146,6 @@ function utilNearestPartner($request, &$p_data)
 				$v_id = $row['id'];
 				$v_minor_distance = $v_distance;
 			}
-			var_dump($v_lat,$v_long,$v_distance,$v_minor_distance);
-			
 		}
 		//
 		if($v_id >0)
